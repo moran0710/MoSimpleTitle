@@ -1,0 +1,5 @@
+name: MoTitleBar
+version: '1.0-SNAPSHOT'
+main: top.molab.minecraft.moTitleBar.MoTitleBar
+api-version: '1.20'
+load: STARTUP
