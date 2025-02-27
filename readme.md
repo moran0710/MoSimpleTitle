@@ -18,6 +18,8 @@
 
 # 4. 命令列表：
 
+所有命令都需要`motitlebar.command`权限
+
 `/mtitle reload` 重新载入配置文件
 
 `/mtitle <actionbar/title/subtitle> <message>` 发送标题（不支持单独发送subtitle）
