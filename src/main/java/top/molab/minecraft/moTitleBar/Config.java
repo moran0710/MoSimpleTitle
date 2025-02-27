@@ -1,72 +1,76 @@
 package top.molab.minecraft.moTitleBar;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.util.List;
 
 public class Config {
-    private final String[] titles;
-    private final String[] subTitles;
-    private final Boolean enableTitleAd;
-    private final Boolean enableSubTitleAd;
-    private final double subTitleSwitchTime;
-    private final double titleSwitchTime;
-    private final double subTitleRenderTime;
-    private final double titleRenderTime;
-    private static Config instance = null;
-
-    public static Config getInstance(FileConfiguration config) {
-        if (instance == null) {
-            instance = new Config(config);
-        }
-        return instance;
+    public List<String> getActionbarMessages() {
+        return actionbarMessages;
     }
+
+    public Boolean getEnableActionbarMessageAd() {
+        return enableActionbarMessageAd;
+    }
+
+    public Boolean getEnableActionbarRandom() {
+        return enableActionbarRandom;
+    }
+
+    public double getActionbarSwitchTime() {
+        return actionbarSwitchTime;
+    }
+
+    private List<String> actionbarMessages;
+    private Boolean enableActionbarMessageAd;
+    private Boolean enableActionbarRandom;
+    private double actionbarSwitchTime;
+
+    public boolean isPAPIEnabled() {
+        return isPAPIEnabled;
+    }
+
+    private boolean isPAPIEnabled;
+    static private Config instance = null;
+
 
     public static Config getInstance() {
         if (instance == null) {
-            throw new IllegalStateException("Config not initialized yet.");
+            throw new IllegalStateException("Config is not initialized");
         }
         return instance;
     }
 
-    private Config(FileConfiguration ConfigFile){
-        this.titles = ConfigFile.getObject("title.texts", String[].class, new String[0]);
-        this.subTitles = ConfigFile.getObject("subtitle.texts", String[].class, new String[0]);
-        this.enableSubTitleAd = ConfigFile.getBoolean("subtitle.enable", false);
-        this.enableTitleAd = ConfigFile.getBoolean("title.enable", true);
-        this.subTitleSwitchTime = ConfigFile.getDouble("subtitle.switchTime", 0);
-        this.titleSwitchTime = ConfigFile.getDouble("title.switchTime", 0);
-        this.subTitleRenderTime = ConfigFile.getDouble("subtitle.renderTime", 0);
-        this.titleRenderTime = ConfigFile.getDouble("title.renderTime", 0);
+    public static Config getInstance(FileConfiguration ConfigFile, boolean isPAPIEnabled) {
+        if (instance == null) {
+            instance = new Config(ConfigFile, isPAPIEnabled);
+        }
+        return instance;
     }
 
-    public String[] getTitles() {
-        return titles;
+    public void reloadConfig() {
+        Boolean PAPI = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
+        MoTitleBar plugin = (MoTitleBar) Bukkit.getPluginManager().getPlugin("MoTitleBar");
+        YamlConfiguration ConfigFile = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config.yml"));
+        this.init(ConfigFile, PAPI);
     }
 
-    public String[] getSubTitles() {
-        return subTitles;
+    private Config(FileConfiguration ConfigFile, boolean isPAPIEnabled) {
+        init(ConfigFile, isPAPIEnabled);
     }
 
-    public Boolean getEnableTitleAd() {
-        return enableTitleAd;
-    }
+    private void init(FileConfiguration ConfigFile, boolean PAPI) {
+        this.isPAPIEnabled = PAPI;
 
-    public Boolean getEnableSubTitleAd() {
-        return enableSubTitleAd;
-    }
+        this.actionbarMessages = ConfigFile.getStringList("actionbar.texts");
+        this.enableActionbarMessageAd = ConfigFile.getBoolean("actionbar.enable");
+        this.enableActionbarRandom = ConfigFile.getBoolean("actionbar.random");
+        this.actionbarSwitchTime = ConfigFile.getDouble("actionbar.switchTime");
 
-    public double getSubTitleSwitchTime() {
-        return subTitleSwitchTime;
-    }
-
-    public double getTitleSwitchTime() {
-        return titleSwitchTime;
-    }
-
-    public double getSubTitleRenderTime() {
-        return subTitleRenderTime;
-    }
-
-    public double getTitleRenderTime() {
-        return titleRenderTime;
     }
 }
+
+

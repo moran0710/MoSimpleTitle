@@ -1,30 +1,15 @@
 # MoTitleBar
 # 一个轻量的title公告插件
 
-title:
-  # 大标题
+actionbar:
+  # 动作栏消息
   # 是否启用
   enable: false
   # 文本内容
   texts:
     - "你好"
-
-  # 显示时长
-  renderTime: 1
-
-  # 切换时间
-  switchTime: 2
-
-subtitle:
-  # 大标题
-  # 是否启用
-  enable: false
-  # 文本内容
-  texts:
-    - "你好"
-
-  # 显示时长
-  renderTime: 1
+  # 是否随机
+  random: true
 
   # 切换时间
   switchTime: 2

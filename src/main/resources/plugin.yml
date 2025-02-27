@@ -2,4 +2,13 @@ name: MoTitleBar
 version: '1.0-SNAPSHOT'
 main: top.molab.minecraft.moTitleBar.MoTitleBar
 api-version: '1.20'
-load: STARTUP
+load: POSTWORLD
+commands:
+  motitlebar:
+    aliases:
+      - mtitle
+    usage: "/motitlebar <TitleType> <msg>"
+    description: "为玩家展示标题"
+    permission: motitlebar.command
+    permission-message: "你没有权限执行此命令"
+softdepend: ["PlaceholderAPI"]
