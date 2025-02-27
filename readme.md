@@ -16,6 +16,20 @@
 2. 启动
 3. 修改`config.yml`
 
-# 4. 许可证
+# 4. 命令列表：
+
+`/mtitle reload` 重新载入配置文件
+
+`/mtitle <actionbar/title/subtitle> <message>` 发送标题（不支持单独发送subtitle）
+
+同时发送多个标题：`/mtitle <type1> <message1> <type2> <message2> ...`
+
+example: `/mtitle title aaa subtitle bbb actionbar ccc`
+
+# 5. 下载：
+
+可以在release找到稳定版，或者在action找到最新构建
+
+# 6. 许可证
 
 MIT

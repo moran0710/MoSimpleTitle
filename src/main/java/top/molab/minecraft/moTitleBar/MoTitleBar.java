@@ -30,10 +30,10 @@ public final class MoTitleBar extends JavaPlugin {
             getLogger().info("disable actionbar message");
         }
 
-        getLogger().info("##################");
-        getLogger().info("#MoTitle | 简单公告#");
-        getLogger().info("#Author:Moran0710 #");
-        getLogger().info("##################");
+        getLogger().info("########################");
+        getLogger().info("#MoSimpleTitle | 简单公告#");
+        getLogger().info("#Author:Moran0710       #");
+        getLogger().info("#########################");
     }
 
     private boolean checkIsPAPIEnabled() {
